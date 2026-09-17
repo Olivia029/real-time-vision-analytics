@@ -1,8 +1,0 @@
-opencv-python
-ultralytics
-streamlit
-pandas
-plotly
-numpy
-pyyaml
-pytest
