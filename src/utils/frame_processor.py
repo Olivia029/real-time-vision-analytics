@@ -1,5 +1,4 @@
 import cv2
-
 from src.detection.detector import Detector
 
 
@@ -12,9 +11,7 @@ class FrameProcessor:
 
         detections = self.detector.detect(frame)
 
-        boxes = detections.boxes
-
-        for box in boxes:
+        for box in detections.boxes:
 
             confidence = float(box.conf[0])
 
@@ -22,11 +19,11 @@ class FrameProcessor:
                 continue
 
             class_id = int(box.cls[0])
-
             class_name = self.detector.model.names[class_id]
 
             x1, y1, x2, y2 = map(int, box.xyxy[0])
 
+            # Bounding box
             cv2.rectangle(
                 frame,
                 (x1, y1),
@@ -35,6 +32,7 @@ class FrameProcessor:
                 2,
             )
 
+            # Label
             label = f"{class_name} {confidence:.2f}"
 
             cv2.putText(
@@ -48,4 +46,3 @@ class FrameProcessor:
             )
 
         return frame
-        
